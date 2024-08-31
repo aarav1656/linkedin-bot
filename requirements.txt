@@ -1,0 +1,5 @@
+openai
+regex
+requests
+jsonlib2
+beautifulsoup4
