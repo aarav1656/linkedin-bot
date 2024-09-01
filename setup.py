@@ -14,11 +14,11 @@ setup(
     description='Linkedin Post Automation system',
 
     # Author information
-    author='Gokul Raja',
-    author_email='gathnexorg@gmail.com',
+    author='Aarav raj',
+    author_email='aarav@exponentium.xyz',
 
     # Project URL
-    url='https://github.com/gathnexadmin/Linkedin_Automation_with_Generative_AI.git',
+    url='https://github.com/aarav1656/Linkedin_Automation_with_Generative_AI.git',
 
     # Packages to be included in the distribution
     packages=["psi"],
