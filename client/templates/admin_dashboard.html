@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-8">
+            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+
+            <!-- Approve Users Section -->
+            <div class="mt-6">
+                <h2 class="text-xl font-bold text-gray-900">Approve Users</h2>
+                <ul>
+                    {% for user in users %}
+                    <li class="mt-2">
+                        <form method="POST">
+                            <span>{{ user.email }}</span>
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <button type="submit" class="ml-4 px-4 py-2 bg-green-500 text-white rounded-md">Approve</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Manage Allowed Emails Section -->
+            <div class="mt-6">
+                <h2 class="text-xl font-bold text-gray-900">Manage Allowed Emails</h2>
+                <form method="POST">
+                    <input type="email" name="allowed_email" placeholder="Enter email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md">Add Email</button>
+                </form>
+                <ul class="mt-4">
+                    {% for allowed_email in allowed_emails %}
+                    <li>{{ allowed_email.email }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
