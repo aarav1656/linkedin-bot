@@ -12,6 +12,10 @@
             <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">LinkedIn Automation</div>
             <form id="postForm" class="mt-6">
                 <textarea id="prompt" name="prompt" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter your prompt here..."></textarea>
+                <div class="mt-4">
+                    <label for="scheduleTime" class="block text-sm font-medium text-gray-700">Schedule post (optional):</label>
+                    <input type="datetime-local" id="scheduleTime" name="scheduleTime" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
                 <button type="submit" class="mt-4 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Submit
                 </button>
@@ -24,12 +28,17 @@
         document.getElementById('postForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var prompt = document.getElementById('prompt').value;
+            var scheduledTime = document.getElementById('scheduleTime').value;
+            
+            var formData = new FormData();
+            formData.append('prompt', prompt);
+            if (scheduledTime) {
+                formData.append('scheduledTime', scheduledTime);
+            }
+
             fetch('/post', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'prompt=' + encodeURIComponent(prompt)
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
