@@ -21,6 +21,33 @@
                 </button>
             </form>
             <div id="result" class="mt-6 text-gray-500"></div>
+
+            <!-- Prompt History Section -->
+            <div class="mt-8">
+                <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">Prompt History</div>
+                <ul id="historyList" class="mt-4 text-gray-700">
+                    {% for history in prompt_history %}
+                    <li class="mb-2">
+                        <div><strong>Prompt:</strong> {{ history.prompt }}</div>
+                        <div><strong>Response:</strong> {{ history.response }}</div>
+                        <div class="text-sm text-gray-500">{{ history.created_at }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Scheduled Posts Section -->
+            <div class="mt-8">
+                <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">Scheduled Posts</div>
+                <ul id="scheduledList" class="mt-4 text-gray-700">
+                    {% for post in scheduled_posts %}
+                    <li class="mb-2">
+                        <div><strong>Prompt:</strong> {{ post.prompt }}</div>
+                        <div class="text-sm text-gray-500">Scheduled for: {{ post.scheduled_time }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -43,6 +70,8 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result').textContent = data.message;
+                // Reload the page to show updated history and scheduled posts
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);
