@@ -3,3 +3,6 @@ regex
 requests
 jsonlib2
 beautifulsoup4
+email-validator
+flask
+

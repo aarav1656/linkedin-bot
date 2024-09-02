@@ -12,6 +12,7 @@
             <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">Sign Up</div>
 
             <form id="signupForm" method="POST" class="mt-6">
+                {{ form.hidden_tag() }} <!-- This includes the CSRF token -->
                 <input type="email" id="email" name="email" placeholder="Email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <input type="password" id="password" name="password" placeholder="Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-4">
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-4">
@@ -29,11 +30,13 @@
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             var confirmPassword = document.getElementById('confirmPassword').value;
+            var csrf_token = document.querySelector('input[name="csrf_token"]').value;
 
             var formData = new FormData();
             formData.append('email', email);
             formData.append('password', password);
             formData.append('confirmPassword', confirmPassword);
+            formData.append('csrf_token', csrf_token);
 
             fetch('/signup', {
                 method: 'POST',
